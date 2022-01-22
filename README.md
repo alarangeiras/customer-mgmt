@@ -19,7 +19,8 @@
 
 1. Start docker compose in detached mode: `docker-compose up -d`
 2. Create the _.env_ file using _.env.example_: `cp -v .env.example .env`
-3. Start serverless offline using the command: `npm run dev`
+3. Install dependencies: `npm install`
+4. Start serverless offline using the command: `npm run dev`
 
 ## Resources:
 
