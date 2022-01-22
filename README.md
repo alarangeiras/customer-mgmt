@@ -25,3 +25,10 @@
 ## Resources:
 
 * Postman Collection: ./docs/customer-mgmt.postman_collection.json
+* Swagger API Description: ./docs/swagger.yaml
+
+
+## How to visualize/edit the swagger content 
+
+1. Open the [Swagger Editor](https://editor.swagger.io/)
+2. Copy the content from swagger file (./docs/swagger.yaml) to the editor.

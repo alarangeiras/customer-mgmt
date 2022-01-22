@@ -1,0 +1,132 @@
+swagger: "2.0"
+info:
+  description: "Proof of Concept made to show tech skills to pagaleve admission process "
+  version: "0.0.1"
+  title: "customer-mgmt"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "alarangeiras@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:3000"
+basePath: "/"
+schemes:
+  - "http"
+paths:
+  /:
+    get:
+      tags:
+        - "customer"
+      summary: "Search customers"
+      operationId: "searchCustomers"
+      parameters:
+        - name: "term"
+          in: "query"
+          description: "search term"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "Search result"
+        "400":
+          description: "Bad Request"
+    post:
+      tags:
+        - "customer"
+      summary: "Add a new customer"
+      operationId: "addCustomer"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Customer to be added"
+          required: true
+          schema:
+            $ref: "#/definitions/Customer"
+      responses:
+        "201":
+          description: "Created"
+        "400":
+          description: "Bad Request"
+  /{customerId}:
+    get:
+      tags:
+        - "customer"
+      summary: "Find a Customer"
+      operationId: "findCustomer"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "customerId"
+          in: "path"
+          description: "id of the customer"
+          required: true
+          type: "string"
+      responses:
+        "400":
+          description: "Invalid Parameters"
+        "200":
+          description: "Customer found"
+    put:
+      tags:
+        - "customer"
+      summary: "Update an existing customer"
+      operationId: "updateCustomer"
+      consumes:
+        - "application/json"
+      parameters:
+        - name: "customerId"
+          in: "path"
+          description: "id of the customer"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "customer to be updated"
+          required: true
+          schema:
+            $ref: "#/definitions/Customer"
+      responses:
+        "400":
+          description: "Invalid Parameters"
+        "404":
+          description: "Customer not found"
+        "204":
+          description: "Update Sucesfully"
+    delete:
+      tags:
+        - "customer"
+      summary: "Delete an existing customer"
+      operationId: "deleteCustomer"
+      consumes:
+        - "application/json"
+      parameters:
+        - name: "customerId"
+          in: "path"
+          description: "id of the customer"
+          required: true
+          type: "string"
+      responses:
+        "400":
+          description: "Invalid Parameters"
+        "404":
+          description: "Customer not found"
+        "204":
+          description: "Delete Sucesfully"
+definitions:
+  Customer:
+    type: "object"
+    properties:
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      adddress:
+        type: "string"
+    xml:
+      name: "Customer"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
