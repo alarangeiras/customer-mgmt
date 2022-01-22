@@ -92,7 +92,7 @@ export class CustomerRepository {
 
     try {
       const result = await this._client.search(params);
-      if (result.body.hits.hits.length > 0) {
+      if (result.statusCode === 200 && result.body.hits.hits.length > 0) {
         return result.body.hits.hits.map((item) => {
           return {
             id: item._id,
