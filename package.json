@@ -1,22 +1,27 @@
 {
   "name": "customer-mngmt",
   "version": "0.0.1",
+  "license": "MIT",
   "scripts": {
-    "dev": "serverless offline",
+    "dev": "NODE_ENV=dev serverless offline",
     "fmt:fix": "prettier --write \"src/**/*.ts\"",
     "fmt:check": "prettier --check \"src/**/*.ts\"",
     "lint:fix": "eslint \"src/**/*.ts\" --fix",
     "lint:check": "eslint \"src/**/*.ts\"",
-    "test": "jest --pass-with-no-tests --no-cache --coverage",
-    "validate": "npm run fmt:check && npm run lint:check"
+    "test": "jest --pass-with-no-tests --no-cache --coverage --verbose",
+    "validate": "npm run fmt:check && npm run lint:check",
+    "deploy": "serverless deploy -s prod",
+    "destroy": "serverless remove -s prod",
+    "prepare": "husky install"
   },
   "engines": {
     "node": ">=14.15.0"
   },
   "dependencies": {
-    "@elastic/elasticsearch": "^7.16.0",
+    "@elastic/elasticsearch": "7.10.0",
     "@middy/core": "^2.5.3",
     "@middy/http-json-body-parser": "^2.5.3",
+    "aws-xray-sdk": "^3.3.4",
     "class-validator": "^0.13.2",
     "uuid": "^8.3.2"
   },
@@ -25,6 +30,7 @@
     "@types/aws-lambda": "^8.10.91",
     "@types/jest": "^27.4.0",
     "@types/node": "^14.18.9",
+    "@types/serverless": "^1.78.42",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
@@ -33,12 +39,14 @@
     "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
     "jest": "^27.4.7",
     "jest-ts-auto-mock": "^2.0.0",
-    "serverless": "^2.23.0",
+    "serverless": "^2.72.1",
     "serverless-esbuild": "^1.23.3",
     "serverless-offline": "^8.3.1",
     "serverless-offline-dotenv": "^0.4.0",
+    "serverless-plugin-tracing": "^2.0.0",
     "serverless-plugin-typescript": "^2.1.0",
     "ts-auto-mock": "^3.5.0",
     "ts-jest": "^27.1.3",

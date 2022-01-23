@@ -10,7 +10,7 @@ export class CustomerController {
   }
 
   async add(customer: Customer): Promise<void> {
-    this._customerRepository.insert(customer);
+    await this._customerRepository.insert(customer);
   }
 
   async search(query: string): Promise<CustomerEntity[]> {

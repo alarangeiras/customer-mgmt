@@ -36,11 +36,14 @@ export class CustomerRepository {
     };
 
     try {
-      await this._client.index(params);
+      const result = await this._client.index(params);
+      if (result.statusCode === 201) {
+        return;
+      }
     } catch (error) {
       throw new Error(error.message);
     }
-    return;
+    throw new Error();
   }
 
   async update(id: string, customer: Customer): Promise<void> {
@@ -77,7 +80,7 @@ export class CustomerRepository {
         return;
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error();
     }
 
     throw new NotFoundError();

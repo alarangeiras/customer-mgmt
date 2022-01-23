@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   elasticsearch:
-    image: elasticsearch:7.16.3
+    image: elasticsearch:7.10.1
     container_name: elasticsearch
     environment:
       - xpack.security.enabled=false

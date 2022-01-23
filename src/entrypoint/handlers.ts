@@ -18,7 +18,7 @@ export const add: APIGatewayProxyHandler = async (
       throw new BadRequest('body not informed');
     }
 
-    _customerController.add(JSON.parse(event.body as string) as Customer);
+    await _customerController.add(JSON.parse(event.body as string) as Customer);
   } catch (error) {
     return _handleErrors(error);
   }
