@@ -9,7 +9,7 @@
     "lint:fix": "eslint \"src/**/*.ts\" --fix",
     "lint:check": "eslint \"src/**/*.ts\"",
     "test": "jest --pass-with-no-tests --no-cache --coverage --verbose",
-    "validate": "npm run fmt:check && npm run lint:check",
+    "validate": "npm run fmt:check && npm run lint:check && npm run test",
     "deploy": "serverless deploy -s prod",
     "destroy": "serverless remove -s prod",
     "prepare": "husky install"
