@@ -53,13 +53,31 @@ describe(__filename, () => {
   });
   describe('insert', () => {
     it('should insert a new customer', async () => {
-      _client.index = jest.fn().mockResolvedValue(null);
+      _client.index = jest.fn().mockResolvedValue({
+        statusCode: 201,
+      });
       const customer: Customer = {
         firstName: 'firstName',
         lastName: 'lastName',
         address: 'address',
       };
       await _customerRepository.insert(customer);
+      expect(_client.index).toBeCalled();
+    });
+    it('should not insert a customer', async () => {
+      _client.index = jest.fn().mockResolvedValue({
+        statusCode: 400,
+      });
+      const customer: Customer = {
+        firstName: 'firstName',
+        lastName: 'lastName',
+        address: 'address',
+      };
+      try {
+        await _customerRepository.insert(customer);
+      } catch (error) {
+        expect(error).not.toBeNull;
+      }
       expect(_client.index).toBeCalled();
     });
     it('should throw a error', async () => {
