@@ -9,7 +9,7 @@ env:
     AWS_ACCOUNT_NUMBER: 345784041182
 
 jobs:
-  validate:
+  deploy:
     runs-on: ubuntu-latest
 
     strategy:
