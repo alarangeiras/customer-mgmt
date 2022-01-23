@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"firstName\": \"Marbet\",\n  \"lastName\": \"Larangeiras\",\n  \"address\": \"Niterói\"\n}",
+					"raw": "{\n  \"firstName\": \"Allan\",\n  \"lastName\": \"Larangeiras\",\n  \"address\": \"Niterói\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,12 +20,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/",
-					"protocol": "http",
+					"raw": "{{url}}/",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "3000",
 					"path": [
 						""
 					]
@@ -39,16 +37,17 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000?term=niterói",
-					"protocol": "http",
+					"raw": "{{url}}/?term=larangeiras",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "3000",
+					"path": [
+						""
+					],
 					"query": [
 						{
 							"key": "term",
-							"value": "niterói"
+							"value": "larangeiras"
 						}
 					]
 				}
@@ -61,19 +60,17 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/:customerId",
-					"protocol": "http",
+					"raw": "{{url}}/:customerId",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "3000",
 					"path": [
 						":customerId"
 					],
 					"variable": [
 						{
 							"key": "customerId",
-							"value": "cGS8gX4Bn7HIQzQLGIKi"
+							"value": "cmRegn4Bn7HIQzQLuoLeasdasdsa"
 						}
 					]
 				}
@@ -86,12 +83,10 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/:customerId",
-					"protocol": "http",
+					"raw": "{{url}}/:customerId",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "3000",
 					"path": [
 						":customerId"
 					],
@@ -120,12 +115,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/:customerId",
-					"protocol": "http",
+					"raw": "{{url}}/:customerId",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "3000",
 					"path": [
 						":customerId"
 					],
