@@ -23,6 +23,7 @@
     "@middy/http-json-body-parser": "^2.5.3",
     "aws-xray-sdk": "^3.3.4",
     "class-validator": "^0.13.2",
+    "joi": "^17.5.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

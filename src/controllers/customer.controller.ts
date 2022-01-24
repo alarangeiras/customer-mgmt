@@ -1,6 +1,7 @@
 import { CustomerEntity } from '../entities/customer.entity';
-import { Customer } from '../model/customer';
+import { Customer, customerSchema } from '../model/customer';
 import { CustomerRepository } from '../repositories/customer.repository';
+import { ValidationUtil } from '../utils/validation.util';
 
 export class CustomerController {
   constructor(private _customerRepository: CustomerRepository) {}
@@ -10,6 +11,7 @@ export class CustomerController {
   }
 
   async add(customer: Customer): Promise<void> {
+    await ValidationUtil.validate(customerSchema, customer);
     await this._customerRepository.insert(customer);
   }
 
@@ -18,6 +20,7 @@ export class CustomerController {
   }
 
   async update(customerId: string, customer: Customer): Promise<void> {
+    await ValidationUtil.validate(customerSchema, customer);
     return this._customerRepository.update(customerId, customer);
   }
 

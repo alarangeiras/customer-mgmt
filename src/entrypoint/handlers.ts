@@ -7,6 +7,7 @@ import { ApiError } from '../errors/api.error';
 import { BadRequest } from '../errors/bad-request.error';
 import { makeCustomerControllerFactory } from '../main/factories/controllers/make-customer-controllers.factory';
 import { Customer } from '../model/customer';
+import { ValidationUtil } from '../utils/validation.util';
 
 const _customerController = makeCustomerControllerFactory();
 
@@ -17,13 +18,17 @@ export const add: APIGatewayProxyHandler = async (
     if (!event.body) {
       throw new BadRequest('body not informed');
     }
-
-    await _customerController.add(JSON.parse(event.body as string) as Customer);
+    await _customerController.add(
+      await ValidationUtil.parseJson<Customer>(event.body as string),
+    );
   } catch (error) {
+    console.error(error);
     return _handleErrors(error);
   }
 
-  return _handleResponse(201, 'the customer was created sucefully');
+  return _handleResponse(201, {
+    message: 'the customer was created sucessfully',
+  });
 };
 
 export const search: APIGatewayProxyHandler = async (
@@ -36,7 +41,7 @@ export const search: APIGatewayProxyHandler = async (
     }
     const term = queryStringParameters['term'];
     const result = await _customerController.search(term as string);
-    return _handleResponse(200, JSON.stringify(result));
+    return _handleResponse(200, result);
   } catch (error) {
     return _handleErrors(error);
   }
@@ -52,7 +57,7 @@ export const find: APIGatewayProxyHandler = async (
     }
     const customerId = pathParameters['customerId'];
     const result = await _customerController.find(customerId);
-    return _handleResponse(200, JSON.stringify(result));
+    return _handleResponse(200, result);
   } catch (error) {
     return _handleErrors(error);
   }
@@ -72,7 +77,7 @@ export const update: APIGatewayProxyHandler = async (
     const customerId = pathParameters['customerId'];
     await _customerController.update(
       customerId,
-      JSON.parse(event.body as string) as Customer,
+      await ValidationUtil.parseJson<Customer>(event.body as string),
     );
     return _handleResponse();
   } catch (error) {
@@ -101,19 +106,28 @@ function _handleErrors(error): APIGatewayProxyResult {
     const apiError = error as ApiError;
     return {
       statusCode: apiError.statusCode,
-      body: apiError.message,
+      body: JSON.stringify({
+        message: apiError.message,
+        details: apiError.details,
+      }),
     };
   }
-
   return {
     statusCode: 500,
     body: error.message,
   };
 }
 
-function _handleResponse(statusCode = 204, body = ''): APIGatewayProxyResult {
+function _handleResponse(
+  statusCode = 204,
+  body: any = null,
+): APIGatewayProxyResult {
+  let responseBody = '';
+  if (body) {
+    responseBody = JSON.stringify(body);
+  }
   return {
     statusCode,
-    body,
+    body: responseBody,
   };
 }

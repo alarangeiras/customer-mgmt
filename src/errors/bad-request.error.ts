@@ -1,7 +1,7 @@
 import { ApiError } from './api.error';
 
 export class BadRequest extends ApiError {
-  constructor(message = 'Bad Request') {
-    super(400, message);
+  constructor(message = 'Bad Request', details = null) {
+    super(400, message, details);
   }
 }
