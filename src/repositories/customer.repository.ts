@@ -23,6 +23,9 @@ export class CustomerRepository {
         } as CustomerEntity;
       }
     } catch (error) {
+      if (error.statusCode === 404) {
+        throw new NotFoundError();
+      }
       throw new Error(error.message);
     }
 

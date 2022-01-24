@@ -40,6 +40,18 @@ describe(__filename, () => {
       }
       expect(_client.get).toBeCalled();
     });
+    it('should not find result 404', async () => {
+      _client.get = jest.fn().mockRejectedValue({
+        statusCode: 404,
+      });
+      const id = '1';
+      try {
+        await _customerRepository.find(id);
+      } catch (error) {
+        expect(error).not.toBeNull;
+      }
+      expect(_client.get).toBeCalled();
+    });
     it('should throw a error', async () => {
       _client.get = jest.fn().mockRejectedValue(new Error());
       const id = '1';

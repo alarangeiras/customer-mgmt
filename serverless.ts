@@ -108,7 +108,7 @@ const serverlessConfiguration: AWS = {
       tracing: true,
     },
     remove: {
-      handler: 'src/entrypoint/handlers.delete',
+      handler: 'src/entrypoint/handlers.remove',
       events: [
         {
           httpApi: {
